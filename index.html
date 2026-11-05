@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pureAI | 致力于全方面开发使用AI，让AI成为我们的绝对智能助手">
+    <title>pureAI | AI高效工具指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        }
+        :root {
+            --primary: #2b6cb0;
+            --primary-light: #ebf8ff;
+            --text-main: #2d3748;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+            --bg-page: #f7fafc;
+            --bg-card: #ffffff;
+        }
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+        /* 导航栏 */
+        nav {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        /* 首屏Hero */
+        .hero {
+            padding: 7rem 10%;
+            text-align: center;
+            background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg-page) 100%);
+        }
+        .hero h1 {
+            font-size: 1.7rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .en-slogan {
+            font-style: italic;
+            color: #2c5282;
+            font-size: 1.05rem;
+        }
+        .hero-desc {
+            max-width: 720px;
+            margin: 1.2rem auto 0;
+            color: var(--text-secondary);
+        }
+        /* 内容容器 */
+        .container {
+            padding: 4rem 10%;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 26px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(43, 108, 176, 0.08);
+        }
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        /* 页脚 */
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 2.2rem 10%;
+            margin-top: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap:1rem;
+        }
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        /* 响应式适配手机 */
+        @media(max-width:768px){
+            nav {
+                flex-direction: column;
+                gap:1rem;
+                padding:1rem 6%;
+            }
+            .nav-links a {
+                margin:0 0.8rem;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            .hero {
+                padding:4rem 6%;
+            }
+            .container {
+                padding:3rem 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href=" " class="logo">pureAI</a >
+        <div class="nav-links">
+            <a href="./index.html">首页</a >
+            <a href="./prompt.html">提示词库</a >
+            <a href="./tutorial.html">教程栏目</a >
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>致力于全方面开发使用AI，让AI成为我们的绝对智能助手</h1>
+        <p class="en-slogan">We are committed to fully exploring and utilizing AI, making it our ultimate intelligent assistant</p >
+        <p class="hero-desc">收集优质AI提示词、工具实操教程、踩坑经验，打造一套可以持续更新的AI学习指南。</p >
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">内容板块</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>提示词工程</h3>
+                <p>通用提示词模板、分场景写法、不同大模型适配技巧，持续收录高质量案例。</p >
+                <a href="./prompt.html">进入查看 →</a >
+            </div>
+            <div class="card">
+                <h3>AI工具教程</h3>
+                <p>各类AI平台、本地模型、API调用实操步骤，手把手带你上手。</p >
+                <a href="./tutorial.html">进入查看 →</a >
+            </div>
+            <div class="card">
+                <h3>落地实践案例</h3>
+                <p>AI辅助学习、视频创作、代码开发的真实案例，直接复刻使用。</p >
+                <a href="#">后续更新</a >
+            </div>
+            <div class="card">
+                <h3>AI避坑知识库</h3>
+                <p>幻觉、版权、隐私、API安全等风险整理，安全高效使用AI。</p >
+                <a href="#">后续更新</a >
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div>© 2026 pureAI All Rights Reserved</div>
+        <div>
+            <a href="https://github.com/puredgelk/pureAI" target="_blank">访问GitHub仓库</a >
+        </div>
+    </footer>
+</body>
+</html>
