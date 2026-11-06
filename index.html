@@ -1,211 +1,388 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="pureAI | 致力于全方面开发使用AI，让AI成为我们的绝对智能助手">
-    <title>pureAI | AI高效工具指南</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-        }
-        :root {
-            --primary: #2b6cb0;
-            --primary-light: #ebf8ff;
-            --text-main: #2d3748;
-            --text-secondary: #4a5568;
-            --border: #e2e8f0;
-            --bg-page: #f7fafc;
-            --bg-card: #ffffff;
-        }
-        body {
-            background-color: var(--bg-page);
-            color: var(--text-main);
-            line-height: 1.7;
-        }
-        /* 导航栏 */
-        nav {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            margin-left: 2rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        /* 首屏Hero */
-        .hero {
-            padding: 7rem 10%;
-            text-align: center;
-            background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg-page) 100%);
-        }
-        .hero h1 {
-            font-size: 1.7rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .en-slogan {
-            font-style: italic;
-            color: #2c5282;
-            font-size: 1.05rem;
-        }
-        .hero-desc {
-            max-width: 720px;
-            margin: 1.2rem auto 0;
-            color: var(--text-secondary);
-        }
-        /* 内容容器 */
-        .container {
-            padding: 4rem 10%;
-        }
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--primary);
-            padding-left: 12px;
-        }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 26px;
-        }
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 26px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(43, 108, 176, 0.08);
-        }
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 12px;
-            font-size: 1.15rem;
-        }
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.96rem;
-        }
-        .card a {
-            display: inline-block;
-            margin-top: 16px;
-            color: var(--primary);
-            font-weight: 500;
-            text-decoration: none;
-        }
-        /* 页脚 */
-        footer {
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border);
-            padding: 2.2rem 10%;
-            margin-top: 5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap:1rem;
-        }
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        /* 响应式适配手机 */
-        @media(max-width:768px){
-            nav {
-                flex-direction: column;
-                gap:1rem;
-                padding:1rem 6%;
-            }
-            .nav-links a {
-                margin:0 0.8rem;
-            }
-            .hero h1 {
-                font-size: 1.3rem;
-            }
-            .hero {
-                padding:4rem 6%;
-            }
-            .container {
-                padding:3rem 6%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="pureAI · AI 高效工具指南：收集优质 AI 提示词、工具实操教程与踩坑经验，打造可持续更新的 AI 学习指南。">
+<title>pureAI · AI 高效工具指南</title>
+<!-- 图标内联为 data URI，保证单文件零外部依赖 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b6cb0'/%3E%3C/svg%3E">
+<style>
+/* ==========================================================================
+   pureAI 首页 · 自包含单文件（内联 CSS + 原生 JS，零外部库、零构建）
+   直接放到 GitHub Pages 仓库根目录即可访问。
+   配色 / 字体 / 布局 / 导航 / 卡片 / 页脚沿用全站设计规范；
+   所有颜色集中在 :root，改主题只改变量。
+
+   目录：1 设计令牌 → 2 基础重置 → 3 粒子画布 → 4 容器 → 5 固定导航
+         → 6 首屏与渐变过渡 → 7 按钮与区块标题 → 8 卡片 Grid
+         → 9 页脚 → 10 响应式
+
+   注：深色模式为保证对比度，主色 / 粒子色提亮为同色系浅蓝；
+       浅色模式下严格为 #2b6cb0。
+   ========================================================================== */
+
+/* ---------- 1. 设计令牌：改主题只改这两块 ---------- */
+:root{
+  --color-primary:#2b6cb0;          /* 主色：冷科技蓝 */
+  --color-primary-hover:#245a94;    /* 主色加深：hover */
+  --color-primary-soft:#ebf3fb;     /* 主色浅底：选中 / 标签 */
+  --color-hero-from:#eef5fc;        /* 首屏渐变起点 */
+  --color-hero-to:#f7fafc;          /* 首屏渐变终点 */
+  --color-on-primary:#ffffff;       /* 主色按钮上的文字 */
+  --color-bg:#f7fafc;               /* 页面背景 */
+  --color-surface:#ffffff;          /* 卡片 / 导航 / 页脚 */
+  --color-border:#e2e8f0;           /* 统一边框 */
+  --color-text:#2d3748;             /* 正文深灰 */
+  --color-text-muted:#4a5568;       /* 次要文字 */
+  --rgb-ink:45,55,72;               /* 阴影用 RGB（= #2d3748） */
+  --particle-rgb:43,108,176;        /* 粒子用 RGB（= #2b6cb0） */
+
+  --font-sans:system-ui,-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  --nav-height:64px; --container-width:1120px;
+  --radius:12px; --radius-sm:8px; --gap:24px; --transition:.2s ease;
+  --shadow-card:0 1px 2px rgba(var(--rgb-ink),.04),0 8px 24px rgba(var(--rgb-ink),.06);
+  --shadow-card-hover:0 6px 14px rgba(var(--rgb-ink),.10),0 14px 32px rgba(var(--rgb-ink),.10);
+}
+/* 深色：深蓝底 + 浅色文字。只覆盖颜色，不改任何结构 */
+html[data-theme="dark"]{
+  --color-primary:#63a4e8; --color-primary-hover:#8dc0f5;
+  --color-primary-soft:#1b3350; --color-hero-from:#12253c; --color-hero-to:#0f1c2e;
+  --color-on-primary:#0f1c2e;
+  --color-bg:#0f1c2e; --color-surface:#15263c; --color-border:#24405e;
+  --color-text:#e6edf6; --color-text-muted:#a9bdd4;
+  --rgb-ink:0,0,0; --particle-rgb:96,165,250;
+  --shadow-card:0 1px 2px rgba(0,0,0,.20),0 8px 24px rgba(0,0,0,.26);
+  --shadow-card-hover:0 6px 14px rgba(0,0,0,.30),0 14px 32px rgba(0,0,0,.34);
+}
+
+/* ---------- 2. 基础重置 ----------
+   关键：html 承担背景色、body 保持透明。否则 z-index:-1 的画布会被
+   body 的不透明背景盖住而看不见（这是负层级画布最常见的坑）。 */
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--color-bg);scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-height) + 20px)}
+body{margin:0;padding-top:var(--nav-height);background:transparent;color:var(--color-text);
+     font-family:var(--font-sans);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+     transition:background-color var(--transition),color var(--transition)}
+h1,h2,h3{line-height:1.4;margin:0 0 .6em}
+p{margin:0 0 1em}
+a{color:var(--color-primary);text-decoration:none}
+a:hover{color:var(--color-primary-hover)}
+:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px;border-radius:3px}
+
+/* ---------- 3. 粒子画布 ----------
+   固定在视口最底层；pointer-events:none 确保绝不遮挡文字与点击。 */
+#particles{position:fixed;inset:0;z-index:-1;display:block;pointer-events:none}
+/* 内容显式抬到画布之上，双保险 */
+main,.site-footer{position:relative;z-index:1}
+
+/* ---------- 4. 布局容器 ---------- */
+.container{width:100%;max-width:var(--container-width);margin-inline:auto;padding-inline:24px}
+
+/* ---------- 5. 顶部固定导航 + 右上角主题按钮 ---------- */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-height);
+             background:var(--color-surface);border-bottom:1px solid var(--color-border)}
+.nav-inner{height:100%;display:flex;align-items:center;gap:12px}
+.brand{font-size:1.35rem;font-weight:700;letter-spacing:.02em;color:var(--color-primary);white-space:nowrap}
+.brand:hover{color:var(--color-primary-hover)}
+.nav-links{display:flex;align-items:center;gap:8px;margin:0 0 0 auto;padding:0;list-style:none}
+.nav-links a{display:block;padding:8px 14px;border-radius:var(--radius-sm);font-size:.95rem;
+             font-weight:500;color:var(--color-text-muted);white-space:nowrap;
+             transition:background var(--transition),color var(--transition)}
+.nav-links a:hover{background:var(--color-primary-soft);color:var(--color-primary)}
+.nav-links a[aria-current="page"]{background:var(--color-primary-soft);color:var(--color-primary);font-weight:600}
+.theme-toggle{flex:none;padding:7px 14px;border:1px solid var(--color-border);border-radius:999px;
+              background:var(--color-surface);color:var(--color-text-muted);font:inherit;
+              font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;
+              transition:border-color var(--transition),color var(--transition),background var(--transition)}
+.theme-toggle:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-soft)}
+
+/* ---------- 6. 首屏 + 到卡片区的 CSS 渐变过渡 ---------- */
+.hero{position:relative;padding:84px 0 88px;
+      background:linear-gradient(135deg,var(--color-hero-from),var(--color-hero-to))}
+/* 底部渐隐到页面背景，与下方内容区无缝衔接，整体干净柔和 */
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:130px;
+             background:linear-gradient(180deg,transparent,var(--color-bg));pointer-events:none}
+.hero .container{position:relative;z-index:1}
+.hero__eyebrow{margin:0 0 14px;font-size:.85rem;font-weight:600;letter-spacing:.08em;color:var(--color-primary)}
+.hero h1{max-width:940px;margin:0 0 18px;font-size:clamp(1.7rem,4vw,2.75rem);letter-spacing:-.01em}
+.hero__subtitle{max-width:940px;margin:0 0 22px;font-size:clamp(.92rem,1.5vw,1.08rem);
+                font-weight:500;letter-spacing:.01em;color:var(--color-primary)}
+.hero__lead{max-width:760px;margin:0;font-size:1.05rem;color:var(--color-text-muted)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+/* ---------- 7. 按钮与区块标题 ---------- */
+.btn{display:inline-block;padding:10px 22px;border:1px solid var(--color-primary);
+     border-radius:var(--radius-sm);font-weight:600;font-size:.95rem;
+     transition:background var(--transition),color var(--transition),transform var(--transition)}
+.btn:hover{transform:translateY(-1px)}
+.btn--primary{background:var(--color-primary);color:var(--color-on-primary)}
+.btn--primary:hover{background:var(--color-primary-hover);color:var(--color-on-primary)}
+.btn--ghost{background:var(--color-surface);color:var(--color-primary)}
+.btn--ghost:hover{background:var(--color-primary-soft);color:var(--color-primary-hover)}
+.section{padding:40px 0 64px}
+.section__head{margin-bottom:28px}
+.section__head h2{margin:0 0 8px;font-size:1.65rem}
+.section__desc{margin:0;color:var(--color-text-muted)}
+
+/* ---------- 8. 卡片区：CSS Grid 自适应列数 ----------
+   auto-fit + minmax 自动决定 1/2/3/4 列，无需多套断点。
+   加卡片只需复制一个 <article class="card">，样式不用改。 */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--gap)}
+.card{display:flex;flex-direction:column;padding:24px;background:var(--color-surface);
+      border:1px solid var(--color-border);border-radius:var(--radius);box-shadow:var(--shadow-card);
+      transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
+.card:hover{transform:translateY(-3px);border-color:var(--color-primary-soft);box-shadow:var(--shadow-card-hover)}
+.card__tag{align-self:flex-start;margin:0 0 12px;padding:2px 10px;border-radius:999px;
+          background:var(--color-primary-soft);color:var(--color-primary);font-size:.78rem;font-weight:600}
+.card__title{margin:0 0 10px;font-size:1.15rem}
+.card__desc{flex:1;margin:0 0 20px;font-size:.95rem;color:var(--color-text-muted)}
+.card__link{align-self:flex-start;font-size:.92rem;font-weight:600}
+.card__link::after{content:" \2192"}   /* 装饰箭头 → */
+
+/* ---------- 9. 页脚 ---------- */
+.site-footer{background:var(--color-surface);border-top:1px solid var(--color-border)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+              gap:12px;padding-block:24px;font-size:.9rem;color:var(--color-text-muted)}
+.site-footer a{font-weight:600}
+
+/* ---------- 10. 响应式：<768px 导航纵向堆叠 ----------
+   --nav-height 同步放大，body 的 padding-top 与 header 高度会自动跟随；
+   主题按钮绝对定位到右上角，仍与 Logo 同一行，不额外占高度。 */
+@media (max-width:768px){
+  :root{--nav-height:112px}
+  .nav-inner{position:relative;flex-direction:column;align-items:stretch;justify-content:center;
+             gap:2px;padding-block:8px}
+  .brand{font-size:1.15rem}
+  .nav-links{margin-left:0;width:100%;justify-content:space-between;gap:4px}
+  .nav-links a{padding:6px 8px;font-size:.88rem}
+  .theme-toggle{position:absolute;top:9px;right:24px}
+  .hero{padding:56px 0 68px}
+  .section{padding:32px 0 48px}
+  .card-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:6px}
+}
+@media (max-width:480px){
+  .container{padding-inline:16px}
+  .theme-toggle{right:16px}
+  .hero__lead{font-size:1rem}
+  .card{padding:20px}
+}
+</style>
 </head>
 <body>
-    <nav>
-        <a href=" " class="logo">pureAI</a >
-        <div class="nav-links">
-            <a href="./index.html">首页</a >
-            <a href="./prompt.html">提示词库</a >
-            <a href="./tutorial.html">教程栏目</a >
-        </div>
+
+<!-- 粒子画布：最底层、不接收指针事件，纯装饰 -->
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<!-- ===== 顶部固定导航：左 Logo，右三个链接 + 浅色/深色切换按钮 =====
+     其他页面请沿用同一份导航与页脚结构，仅 aria-current 不同。 -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">pureAI</a>
+    <nav aria-label="主导航">
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">首页</a></li>
+        <li><a href="prompt.html">提示词库</a></li>
+        <li><a href="tutorial.html">教程栏目</a></li>
+      </ul>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">浅色模式</button>
+  </div>
+</header>
 
-    <div class="hero">
-        <h1>致力于全方面开发使用AI，让AI成为我们的绝对智能助手</h1>
-        <p class="en-slogan">We are committed to fully exploring and utilizing AI, making it our ultimate intelligent assistant</p >
-        <p class="hero-desc">收集优质AI提示词、工具实操教程、踩坑经验，打造一套可以持续更新的AI学习指南。</p >
-    </div>
+<main>
 
+  <!-- ===== 首屏 ===== -->
+  <section class="hero">
     <div class="container">
-        <h2 class="section-title">内容板块</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>提示词工程</h3>
-                <p>通用提示词模板、分场景写法、不同大模型适配技巧，持续收录高质量案例。</p >
-                <a href="./prompt.html">进入查看 →</a >
-            </div>
-            <div class="card">
-                <h3>AI工具教程</h3>
-                <p>各类AI平台、本地模型、API调用实操步骤，手把手带你上手。</p >
-                <a href="./tutorial.html">进入查看 →</a >
-            </div>
-            <div class="card">
-                <h3>落地实践案例</h3>
-                <p>AI辅助学习、视频创作、代码开发的真实案例，直接复刻使用。</p >
-                <a href="#">后续更新</a >
-            </div>
-            <div class="card">
-                <h3>AI避坑知识库</h3>
-                <p>幻觉、版权、隐私、API安全等风险整理，安全高效使用AI。</p >
-                <a href="#">后续更新</a >
-            </div>
-        </div>
+      <p class="hero__eyebrow">开源 · 中文 · 持续更新</p>
+      <h1>致力于全方面开发使用AI，让AI成为我们的绝对智能助手</h1>
+      <p class="hero__subtitle" lang="en">We are committed to fully exploring and utilizing AI, making it our ultimate intelligent assistant</p>
+      <p class="hero__lead">收集优质AI提示词、工具实操教程、踩坑经验，打造一套可以持续更新的AI学习指南。</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="prompt.html">浏览提示词库</a>
+        <a class="btn btn--ghost" href="tutorial.html">从教程开始</a>
+      </div>
     </div>
+  </section>
 
-    <footer>
-        <div>© 2026 pureAI All Rights Reserved</div>
-        <div>
-            <a href="https://github.com/puredgelk/pureAI" target="_blank">访问GitHub仓库</a >
-        </div>
-    </footer>
+  <!-- ===== 内容卡片区：4 类 AI 内容 =====
+       每张卡片 = 标题 + 简介 + 一个「进入查看」链接。
+       链接指向同仓库页面/锚点；若只单独部署这一个文件，
+       把 href 改成你的目标地址（或 # ）即可。 -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>从这里开始</h2>
+        <p class="section__desc">四个方向，把「知道 AI」变成「真正用得上 AI」。</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <span class="card__tag">方法一</span>
+          <h3 class="card__title">提示词工程</h3>
+          <p class="card__desc">结构化提示词框架、角色与约束写法、可复用模板，把含糊的提问变成稳定的输出。</p>
+          <a class="card__link" href="prompt.html">进入查看</a>
+        </article>
+
+        <article class="card">
+          <span class="card__tag">方法二</span>
+          <h3 class="card__title">AI工具教程</h3>
+          <p class="card__desc">主流 AI 工具的上手路径与实操步骤，讲清每个功能适合解决什么问题、怎么组合。</p>
+          <a class="card__link" href="tutorial.html">进入查看</a>
+        </article>
+
+        <article class="card">
+          <span class="card__tag">方法三</span>
+          <h3 class="card__title">落地实践案例</h3>
+          <p class="card__desc">把 AI 接进真实工作流：信息收集、整理、成稿与复盘，重点在减少来回返工。</p>
+          <a class="card__link" href="tutorial.html#workflow">进入查看</a>
+        </article>
+
+        <article class="card">
+          <span class="card__tag">方法四</span>
+          <h3 class="card__title">AI避坑知识库</h3>
+          <p class="card__desc">幻觉、过度依赖、隐私边界与常见误区，先看清限制，再谈效率。</p>
+          <a class="card__link" href="tutorial.html#pitfalls">进入查看</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>&copy; 2026 pureAI All Rights Reserved</span>
+    <a href="https://github.com/puredgelk/pureAI" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   原生 JS，无任何外部依赖。分两块：
+   A. 浅色 / 深色模式切换（记忆到 localStorage）
+   B. Canvas 科技粒子：缓慢漂浮 + 近距离连线 + 鼠标吸附聚拢
+   两块放在同一个 IIFE 里，方便主题切换时同步刷新粒子颜色。
+   ========================================================================== */
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var btn  = document.getElementById('themeToggle');
+  var KEY  = 'pureai-theme';
+
+  /* ---------- B. 粒子系统 ---------- */
+  var canvas = document.getElementById('particles');
+  var ctx = canvas.getContext('2d');
+  var w = 0, h = 0, dpr = 1, dots = [];
+  var LINK = 130;        // 连线距离阈值
+  var ATTRACT = 160;     // 鼠标吸附作用半径
+  var MAX_DOTS = 110;
+  var rgb = '43,108,176';
+  var mouse = { x: -9999, y: -9999, active: false };
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 从 CSS 变量读粒子颜色：浅色=#2b6cb0，深色=同色系提亮蓝 */
+  function refreshColor() {
+    var v = getComputedStyle(root).getPropertyValue('--particle-rgb').trim();
+    if (v) rgb = v;
+  }
+
+  function spawn() {
+    var vx = (Math.random() - .5) * .28, vy = (Math.random() - .5) * .28;
+    return { x: Math.random() * w, y: Math.random() * h,
+             vx: vx, vy: vy, baseVx: vx, baseVy: vy, r: Math.random() * 1.5 + 1 };
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var n = Math.min(MAX_DOTS, Math.max(36, Math.round(w * h / 16000)));
+    dots = []; for (var i = 0; i < n; i++) dots.push(spawn());
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    var speed = reduceMotion ? .15 : 1;
+
+    for (var i = 0; i < dots.length; i++) {
+      var p = dots[i];
+
+      /* 吸附：鼠标附近的粒子受到朝向鼠标的力，越近越强；
+         之后逐渐回归自身漂浮速度，避免塌缩成一个点。 */
+      if (mouse.active && !reduceMotion) {
+        var dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < ATTRACT && d > 8) {
+          var f = (1 - d / ATTRACT) * .16;
+          p.vx += dx / d * f; p.vy += dy / d * f;
+        }
+      }
+      p.vx += (p.baseVx - p.vx) * .025;
+      p.vy += (p.baseVy - p.vy) * .025;
+      p.vx = Math.max(-1.6, Math.min(1.6, p.vx));
+      p.vy = Math.max(-1.6, Math.min(1.6, p.vy));
+      p.x += p.vx * speed; p.y += p.vy * speed;
+
+      /* 越界回绕，保持粒子数量恒定 */
+      if (p.x < -20) p.x = w + 20; else if (p.x > w + 20) p.x = -20;
+      if (p.y < -20) p.y = h + 20; else if (p.y > h + 20) p.y = -20;
+
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + rgb + ',0.2)';   /* 透明度约 0.2 */
+      ctx.fill();
+    }
+
+    /* 近距离连线：透明度按距离衰减，上限约 0.2，保持柔和 */
+    for (var a = 0; a < dots.length; a++) {
+      for (var b = a + 1; b < dots.length; b++) {
+        var p1 = dots[a], p2 = dots[b];
+        var lx = p1.x - p2.x, ly = p1.y - p2.y, dist = Math.sqrt(lx * lx + ly * ly);
+        if (dist < LINK) {
+          ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = 'rgba(' + rgb + ',' + ((1 - dist / LINK) * .2).toFixed(3) + ')';
+          ctx.lineWidth = 1; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function setMouse(x, y) { mouse.x = x; mouse.y = y; mouse.active = true; }
+  window.addEventListener('mousemove', function (e) { setMouse(e.clientX, e.clientY); });
+  window.addEventListener('touchmove', function (e) {
+    if (e.touches[0]) setMouse(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  window.addEventListener('touchend', function () { mouse.active = false; });
+  document.addEventListener('mouseleave', function () { mouse.active = false; });
+  window.addEventListener('blur', function () { mouse.active = false; });
+  window.addEventListener('resize', resize);
+
+  /* ---------- A. 主题切换 ---------- */
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    btn.textContent = (t === 'dark') ? '深色模式' : '浅色模式';
+    btn.setAttribute('aria-pressed', String(t === 'dark'));
+    btn.setAttribute('aria-label', '当前为' + btn.textContent + '，点击切换');
+    try { localStorage.setItem(KEY, t); } catch (e) { /* 隐私模式下忽略 */ }
+    refreshColor();          // 深色 / 浅色用不同的粒子色，保证可见
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) { /* 忽略 */ }
+  setTheme(saved === 'dark' ? 'dark' : 'light');   // 默认浅色模式
+  btn.addEventListener('click', function () {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---------- 启动 ---------- */
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
+
